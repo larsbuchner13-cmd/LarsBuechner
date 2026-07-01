@@ -126,34 +126,87 @@ a {
   margin-bottom: 1.5rem;
 }
 
-/* Projects */
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+/* Timeline (experience & education) */
+.timeline {
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
   margin-top: 2rem;
 }
 
-.project-card {
+.timeline-item {
   background: var(--color-bg);
   border: 1px solid #eaeaea;
   border-radius: var(--radius);
   padding: 1.5rem;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+.section.alt .timeline-item {
+  background: var(--color-bg);
 }
 
-.project-card h3 {
+.timeline-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-.project-card .link {
-  display: inline-block;
-  margin-top: 1rem;
+.timeline-header h3 {
+  font-size: 1.1rem;
+}
+
+.timeline-date {
+  color: var(--color-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.timeline-item ul {
+  margin-top: 0.5rem;
+  padding-left: 1.25rem;
+}
+
+.timeline-item li {
+  margin-bottom: 0.35rem;
+}
+
+/* Qualifications */
+.qual-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.qual-card {
+  background: var(--color-bg);
+  border: 1px solid #eaeaea;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.qual-card h3 {
+  margin-bottom: 0.75rem;
+}
+
+.qual-card ul {
+  padding-left: 1.25rem;
+}
+
+.qual-card li {
+  margin-bottom: 0.35rem;
+}
+
+/* Contact info */
+.contact-info {
+  list-style: none;
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   font-weight: 600;
 }
 
