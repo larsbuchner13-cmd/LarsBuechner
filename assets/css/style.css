@@ -82,18 +82,73 @@ a {
 .hero {
   padding: 6rem 0 5rem;
   text-align: center;
-  background: linear-gradient(180deg, var(--color-bg-alt), var(--color-bg));
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(51, 85, 255, 0.12), transparent),
+    linear-gradient(180deg, var(--color-bg-alt), var(--color-bg));
+}
+
+.hero-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
 }
 
 .hero h1 {
   font-size: 2.75rem;
-  margin-bottom: 0.75rem;
+  line-height: 1.2;
+  max-width: 800px;
+  margin: 0 auto 1rem;
+}
+
+.hero .accent {
+  color: var(--color-primary);
 }
 
 .hero .subtitle {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: var(--color-muted);
-  margin-bottom: 2rem;
+  max-width: 680px;
+  margin: 0 auto 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-outline:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.hero-badges {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 2.5rem;
+}
+
+.hero-badges li {
+  background: var(--color-bg);
+  border: 1px solid #dfe3f0;
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-muted);
 }
 
 .btn {
@@ -124,6 +179,163 @@ a {
 .section h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
+}
+
+.section-intro {
+  max-width: 720px;
+  color: var(--color-muted);
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Feature card (KI project) */
+.feature-card {
+  background: var(--color-bg);
+  border: 1px solid #dfe3f0;
+  border-left: 5px solid var(--color-primary);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 24px rgba(31, 36, 48, 0.06);
+}
+
+.feature-tag {
+  display: inline-block;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.feature-points {
+  margin: 1rem 0 1.25rem;
+  padding-left: 1.25rem;
+}
+
+.feature-points li {
+  margin-bottom: 0.4rem;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  background: var(--color-bg-alt);
+  border: 1px solid #dfe3f0;
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* Skill cards */
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.skill-card {
+  background: var(--color-bg);
+  border: 1px solid #dfe3f0;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.skill-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary-dark);
+}
+
+.skill-card p {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+/* Initiative grid */
+.initiative-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.initiative-card {
+  background: var(--color-bg-alt);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+}
+
+.initiative-num {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  opacity: 0.5;
+  margin-bottom: 0.5rem;
+}
+
+.initiative-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.initiative-card p {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+/* Ehrenamt split layout */
+.split {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.stat-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stat-card {
+  background: var(--color-bg);
+  border: 1px solid #dfe3f0;
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.stat-label {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 820px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Timeline (experience & education) */
@@ -254,6 +466,10 @@ a {
 
 /* Mobile nav */
 @media (max-width: 720px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
   .nav-toggle {
     display: block;
   }
