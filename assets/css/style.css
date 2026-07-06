@@ -140,17 +140,6 @@ a {
     0 20px 45px rgba(31, 36, 48, 0.18);
 }
 
-.btn-outline {
-  background: transparent;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-}
-
-.btn-outline:hover {
-  background: var(--color-primary);
-  color: #fff;
-}
-
 .hero-badges {
   list-style: none;
   display: flex;
@@ -183,6 +172,17 @@ a {
 
 .btn:hover {
   background: var(--color-primary-dark);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-outline:hover {
+  background: var(--color-primary);
+  color: #fff;
 }
 
 /* Sections */
@@ -242,6 +242,10 @@ a {
 
 .feature-points li {
   margin-bottom: 0.4rem;
+}
+
+.btn-instagram {
+  margin-top: 0.5rem;
 }
 
 .chip-row {
@@ -480,6 +484,22 @@ a {
   text-align: center;
   color: var(--color-muted);
   border-top: 1px solid #eaeaea;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-social {
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.footer-social:hover {
+  color: var(--color-primary);
 }
 
 /* Hero on smaller screens */
