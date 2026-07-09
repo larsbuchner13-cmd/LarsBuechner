@@ -264,6 +264,16 @@ a {
   color: var(--color-text);
 }
 
+.feature-note {
+  margin-top: 1.25rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.btn-project-link {
+  margin-top: 1rem;
+}
+
 /* Skill cards */
 .skill-grid {
   display: grid;
