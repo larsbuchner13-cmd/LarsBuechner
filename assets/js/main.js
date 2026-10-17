@@ -16,7 +16,7 @@ const formStatus = document.getElementById("formStatus");
 
 contactForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  formStatus.textContent = "Thanks for reaching out! I'll get back to you soon.";
+  formStatus.textContent = "Vielen Dank für Ihre Nachricht! Ich melde mich zeitnah bei Ihnen.";
   formStatus.hidden = false;
   contactForm.reset();
 });
