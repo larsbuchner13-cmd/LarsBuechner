@@ -1,51 +1,51 @@
 (() => {
   'use strict';
-  const scenes = [...document.querySelectorAll('[data-scene]')];
-  const backgrounds = [...document.querySelectorAll('.backdrop')];
+  const scenes = [...document.querySelectorAll('section[data-scene]')];
   const chapterLinks = [...document.querySelectorAll('.chapter-nav a')];
   const header = document.querySelector('.site-header');
-  const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const desktop = window.matchMedia('(min-width: 721px) and (pointer: fine)');
-  const depthLayers = [...document.querySelectorAll('.depth')];
-  let motionEnabled = !preference.matches;
-  let current = -1, framePending = false, pointerX = 0, pointerY = 0;
-  function updateMotion() {
-    document.body.classList.toggle('motion-off', !motionEnabled);
-    if (!motionEnabled) {
-      document.documentElement.style.setProperty('--bg-x', '0px');
-      document.documentElement.style.setProperty('--bg-y', '0px');
-      depthLayers.forEach(layer => { layer.style.setProperty('--rx', '0deg'); layer.style.setProperty('--ry', '0deg'); });
-    }
-    schedule();
-  }
-  preference.addEventListener('change', event => { motionEnabled = !event.matches; updateMotion(); });
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let pending = false, current = -1;
   function render() {
-    framePending = false;
-    const marker = window.innerHeight * .47;
-    let next = 0;
-    scenes.forEach((scene, index) => { if (scene.getBoundingClientRect().top <= marker) next = index; });
-    if (next !== current) {
-      current = next;
-      backgrounds.forEach((bg, index) => bg.classList.toggle('active', index === next));
-      chapterLinks.forEach((link, index) => { link.classList.toggle('active', index === next); if (index === next) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current'); });
-      const navTarget = next >= 2 && next <= 4 ? '#projekte' : `#${scenes[next].id}`;
-      document.querySelectorAll('.site-header nav a').forEach(link => { if (link.getAttribute('href') === navTarget) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current'); });
+    pending = false;
+    const marker = scrollY + innerHeight*.45;
+    let index = 0;
+    scenes.forEach((scene,i) => { if(scene.offsetTop <= marker) index=i; });
+    if(index!==current) {
+      current=index;
+      document.body.dataset.chapter=String(index);
+      chapterLinks.forEach((link,i) => {
+        link.classList.toggle('active',i===index);
+        if(i===index)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');
+      });
+      const navTarget=index>=2&&index<=4?'#projekte':`#${scenes[index].id}`;
+      document.querySelectorAll('.site-header nav a').forEach(link => {
+        if(link.getAttribute('href')===navTarget)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');
+      });
     }
-    header.classList.toggle('scrolled', window.scrollY > 30);
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    document.documentElement.style.setProperty('--progress', total > 0 ? Math.min(1, Math.max(0, window.scrollY / total)) : 0);
-    if (motionEnabled && desktop.matches) {
-      const offset = scenes[current].getBoundingClientRect().top / window.innerHeight;
-      document.documentElement.style.setProperty('--bg-x', `${pointerX * -10}px`);
-      document.documentElement.style.setProperty('--bg-y', `${offset * -22 + pointerY * -7}px`);
-      depthLayers.forEach(layer => { layer.style.setProperty('--rx', `${pointerY * -3}deg`); layer.style.setProperty('--ry', `${pointerX * 5}deg`); });
-    }
+    const stops=scenes.map((scene,i) => i===0?0:scene.offsetTop-innerHeight*.36);
+    let from=0;
+    stops.forEach((stop,i)=>{if(scrollY>=stop)from=i;});
+    const next=Math.min(scenes.length-1,from+1);
+    const fraction=next===from?0:Math.min(1,Math.max(0,(scrollY-stops[from])/(stops[next]-stops[from])));
+    const progress=from+fraction;
+    const heroShift=Math.min(1,scrollY/Math.max(1,scenes[0].offsetHeight-innerHeight*.6));
+    dispatchEvent(new CustomEvent('portfolio:scene',{detail:{progress,heroShift}}));
+    header.classList.toggle('scrolled',scrollY>40);
+    const total=document.documentElement.scrollHeight-innerHeight;
+    document.documentElement.style.setProperty('--progress',total>0?Math.min(1,scrollY/total):0);
   }
-  function schedule() { if (!framePending) { framePending = true; requestAnimationFrame(render); } }
-  window.addEventListener('scroll', schedule, {passive:true});
-  window.addEventListener('resize', schedule, {passive:true});
-  window.addEventListener('pointermove', event => { if (!motionEnabled || !desktop.matches) return; pointerX = (event.clientX / window.innerWidth - .5) * 2; pointerY = (event.clientY / window.innerHeight - .5) * 2; schedule(); }, {passive:true});
-  document.documentElement.addEventListener('pointerleave', () => { pointerX = 0; pointerY = 0; schedule(); });
-  window.addEventListener('pageshow', schedule);
-  updateMotion();
+  function schedule(){if(!pending){pending=true;requestAnimationFrame(render);}}
+  if('IntersectionObserver' in window){
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('in-view');observer.unobserve(entry.target);}});
+    },{threshold:.08});
+    document.querySelectorAll('.scene:not(.hero)>.content').forEach(item=>observer.observe(item));
+    document.body.classList.add('reveal-ready');
+  }
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule,{passive:true});
+  addEventListener('pageshow',schedule);
+  document.fonts?.ready.then(schedule);
+  reduced.addEventListener('change',schedule);
+  schedule();
 })();
