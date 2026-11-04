@@ -14,9 +14,6 @@
   function updateMotion() {
     document.body.classList.toggle('motion-off', !motionEnabled);
     document.body.classList.toggle('motion-on', motionEnabled);
-    toggle.setAttribute('aria-pressed', String(motionEnabled));
-    toggle.querySelector('.motion-state').textContent = motionEnabled ? 'an' : 'aus';
-    toggle.setAttribute('aria-label', `3D-Bewegung ${motionEnabled ? 'ausschalten' : 'einschalten'}`);
     if (!motionEnabled) {
       document.documentElement.style.setProperty('--bg-x', '0px');
       document.documentElement.style.setProperty('--bg-y', '0px');
@@ -24,7 +21,6 @@
     }
     schedule();
   }
-  toggle.addEventListener('click', () => { motionEnabled = !motionEnabled; try { localStorage.setItem('lars-motion', motionEnabled ? 'on' : 'off'); } catch {} updateMotion(); });
   preference.addEventListener('change', event => { motionEnabled = !event.matches; updateMotion(); });
   function render() {
     framePending = false;
