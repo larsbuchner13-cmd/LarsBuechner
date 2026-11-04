@@ -4,16 +4,13 @@
   const backgrounds = [...document.querySelectorAll('.backdrop')];
   const chapterLinks = [...document.querySelectorAll('.chapter-nav a')];
   const header = document.querySelector('.site-header');
-  const toggle = document.querySelector('.motion-toggle');
   const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const desktop = window.matchMedia('(min-width: 721px) and (pointer: fine)');
   const depthLayers = [...document.querySelectorAll('.depth')];
   let motionEnabled = !preference.matches;
-  try { const saved = localStorage.getItem('lars-motion'); if (saved !== null && !preference.matches) motionEnabled = saved === 'on'; } catch {}
   let current = -1, framePending = false, pointerX = 0, pointerY = 0;
   function updateMotion() {
     document.body.classList.toggle('motion-off', !motionEnabled);
-    document.body.classList.toggle('motion-on', motionEnabled);
     if (!motionEnabled) {
       document.documentElement.style.setProperty('--bg-x', '0px');
       document.documentElement.style.setProperty('--bg-y', '0px');
