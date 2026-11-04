@@ -38,8 +38,8 @@
       float d = length(gl_PointCoord - vec2(0.5));
       if (d > 0.5) discard;
       float glow = exp(-d * d * 14.0);
-      vec3 green = mix(vec3(0.05, 0.84, 0.57), vec3(0.72, 1.0, 0.90), vWhite);
-      gl_FragColor = vec4(green, glow * vAlpha * 1.85);
+      vec3 blue = mix(vec3(0.22, 0.59, 0.96), vec3(0.80, 0.90, 1.0), vWhite);
+      gl_FragColor = vec4(blue, glow * vAlpha * 1.85);
     }
   `;
   let program, buffers, locations, count, shapes, metadata;
